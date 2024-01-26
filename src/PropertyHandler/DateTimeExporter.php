@@ -54,6 +54,10 @@ class DateTimeExporter implements Exporter, Importer
             return null;
         }
 
+        if(is_numeric($string)) {
+            $string = "@$string";
+        }
+
         // @todo It would be helpful to use https://www.php.net/manual/en/datetimeimmutable.createfromformat.php
         // to only accept value sin the expected format. However, that method
         // auto-fills missing values with the current time.  The constructor does
