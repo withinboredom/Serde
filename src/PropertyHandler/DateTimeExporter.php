@@ -38,6 +38,12 @@ class DateTimeExporter implements Exporter, Importer
         $format = $typeField?->format ?? \DateTimeInterface::RFC3339_EXTENDED;
 
         $string = $value->format($format);
+
+        if($format === 'U') {
+            // export unix timestamps as integers
+            return $serializer->formatter->serializeInt($runningValue, $field, (int) $string);
+        }
+        
         return $serializer->formatter->serializeString($runningValue, $field, $string);
     }
 
@@ -54,6 +60,7 @@ class DateTimeExporter implements Exporter, Importer
             return null;
         }
 
+        // todo: assert that typefield->format is "U"
         if(is_numeric($string)) {
             $string = "@$string";
         }
