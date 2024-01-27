@@ -25,5 +25,8 @@ class DateTimeExample
 
         #[DateField(timezone: 'America/Chicago')]
         public DateTimeImmutable $forceToChicago,
+
+        #[DateField(format: 'U')]
+        public DateTimeImmutable $unixTimestamp,
     ) {}
 }
